@@ -60,7 +60,7 @@ class App{
     $breed = $_GET['breed'] ?? null;
     $subBreed = $_GET['subbreed'] ?? null;
 
-    if($breed!="eurasier"){ //checks if there's a breed
+    if($breed!="eurasier" && $breed){ //checks if there's a breed
       $endpoint = file_get_contents("https://dog.ceo/api/breed/$breed/images");
       $altText = "Picture of $breed";
       
