@@ -47,6 +47,7 @@ class App{
         echo "<a href='?breed=$breed' class='nounderline'><li>" . ucfirst($breed) . "</li></a>";
       }
     }
+    echo "<a href='?breed=eurasier' class='nounderline'><li>Eurasier</li></a>";
     echo "</ol>";
   }
 
@@ -59,20 +60,32 @@ class App{
     $breed = $_GET['breed'] ?? null;
     $subBreed = $_GET['subbreed'] ?? null;
 
-    if($breed){ //checks if there's a breed
+    if($breed!="eurasier"){ //checks if there's a breed
       $endpoint = file_get_contents("https://dog.ceo/api/breed/$breed/images");
       $altText = "Picture of $breed";
-
+      
       if($subBreed){ //changes $endpoint if there's a sub breed
         $endpoint = file_get_contents("https://dog.ceo/api/breed/$breed/$subBreed/images");
         $altText .= " $subBreed";
       }
-
+      
       $imageArray = json_decode($endpoint, true)['message'];
-
+      
       foreach($imageArray as $image){
         echo "<img src='$image' class='rounded' alt='$altText'>";
       }
+    }
+    else if($breed=="eurasier"){
+      $pic1 = "./images/sauron1.jpg";
+      $pic2 = "./images/sauron2.jpg";
+      $pic3 = "./images/sauron3.jpg";
+      $pic4 = "./images/sauron4.jpg";
+      $pic5 = "./images/sauron5.jpg";
+      echo "<img src='$pic1' class='rounded' alt='Bild på världens sötaste eurasier'>";
+      echo "<img src='$pic2' class='rounded' alt='Bild på världens sötaste eurasier'>";
+      echo "<img src='$pic3' class='rounded' alt='Bild på världens sötaste eurasier'>";
+      echo "<img src='$pic4' class='rounded' alt='Bild på världens sötaste eurasier'>";
+      echo "<img src='$pic5' class='rounded' alt='Bild på världens sötaste eurasier'>";
     }
   }
 }
